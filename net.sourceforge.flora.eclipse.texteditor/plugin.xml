@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="net.sourceforge.flora.eclipse.texteditor.editor.FloraEditor"
+            default="false"
+            extensions="flr"
+            icon="icons/mapfile.gif"
+            id="net.sourceforge.flora.eclipse.texteditor.texteditor"
+            name="Flora-2 Editor"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.documentProviders">
+      <provider
+            class="org.eclipse.ui.editors.text.TextFileDocumentProvider"
+            id="net.sourceforge.flora.eclipse.texteditor.floradocumentprovider"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            class="net.sourceforge.flora.eclipse.texteditor.editor.FloraSetup"
+            extensions="flr"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="net.sourceforge.flora.eclipse.preferencePage"
+            class="net.sourceforge.flora.eclipse.texteditor.preferences.FloraPreferencePage"
+            id="net.sourceforge.flora.eclipse.texteditor.preferencePage"
+            name="Flora-2 Text Editor"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="net.sourceforge.flora.eclipse.texteditor.preferences.FloraPreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="net.sourceforge.flora.eclipse.texteditor.editorActions"
+            label="Flora Texteditor Actions"
+            >
+         <menu
+               id="net.sourceforge.flora.eclipse.menu"
+               label="F&amp;lora"
+               >
+            <separator name="format"/>
+            <separator name="buffer"/>
+            <separator name="loading"/>
+         </menu>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.FormatAction"
+               id="net.sourceforge.flora.eclipse.texteditor.editorActions.format"
+               label="Format"
+               menubarPath="net.sourceforge.flora.eclipse.menu/format"
+               />
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.OpenBufferAction"
+               id="net.sourceforge.flora.eclipse.texteditor.openBufferAction"
+               label="&amp;Open Buffer"
+               menubarPath="net.sourceforge.flora.eclipse.menu/buffer"
+               style="push"/>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.ExecuteQueryAction"
+               id="net.sourceforge.flora.eclipse.texteditor.loadQueryAction"
+               label="Execute Region as a Query"
+               menubarPath="net.sourceforge.flora.eclipse.menu/loading"
+               style="push"
+               tooltip="executes the highlighted region as a query"/>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.LoadRegionAction"
+               id="net.sourceforge.flora.eclipse.texteditor.loadRegionAction"
+               label="Load Region"
+               menubarPath="net.sourceforge.flora.eclipse.menu/loading"
+               style="push"
+               tooltip="loads the highlighted Region to Flora"/>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.LoadRegionToModuleAction"
+               id="net.sourceforge.flora.eclipse.texteditor.loadRegionToModuleAction"
+               label="Load Region to Module"
+               menubarPath="net.sourceforge.flora.eclipse.menu/loading"
+               style="push"
+               tooltip="loads the highlighted Region to a specified Module"/>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.AddRegionAction"
+               id="net.sourceforge.flora.eclipse.texteditor.addRegionAction"
+               label="Add Region"
+               menubarPath="net.sourceforge.flora.eclipse.menu/loading"
+               style="push"
+               tooltip="adds the highlighted Region to Flora"/>
+         <action
+               class="net.sourceforge.flora.eclipse.texteditor.actions.AddRegionToModuleAction"
+               id="net.sourceforge.flora.eclipse.texteditor.addRegionToModuleAction"
+               label="Add Region to Module"
+               menubarPath="net.sourceforge.flora.eclipse.menu/loading"
+               style="push"
+               tooltip="adds the highlighted Region to a specified Module"/>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSetPartAssociations">
+      <actionSetPartAssociation targetID="net.sourceforge.flora.eclipse.texteditor.editorActions">
+         <part id="net.sourceforge.flora.eclipse.texteditor.texteditor"/>
+      </actionSetPartAssociation>
+   </extension>
+</plugin>

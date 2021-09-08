@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/declarativa/interprolog/|com/declarativa/interprolog/examples/|com/declarativa/interprolog/examples/SudokuPuzzles/|com/declarativa/interprolog/gnu/|com/declarativa/interprolog/gui/|com/declarativa/interprolog/gui/images/|com/declarativa/interprolog/swi/|com/declarativa/interprolog/util/|com/declarativa/interprolog/xsb/|com/declarativa/interprolog/yap/|com/xsb/interprolog/|net/sourceforge/flora/javaAPI/src/|net/sourceforge/flora/javaAPI/util/" kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/flora2java.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/interprolog.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

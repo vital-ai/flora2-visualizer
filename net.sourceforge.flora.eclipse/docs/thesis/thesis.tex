@@ -1,0 +1,958 @@
+\documentclass[a4paper,11pt]{article}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+% Borders
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm,includeheadfoot]{geometry}
+
+%% Normal LaTeX or pdfLaTeX? %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> The new if-Command "\ifpdf" will be used at some
+%% ==> places to ensure the compatibility between
+%% ==> LaTeX and pdfLaTeX.
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse              %%normal LaTeX is executed
+\else
+	\pdfoutput=1
+	\pdftrue               %%pdfLaTeX is executed
+\fi
+
+
+%% Fonts for pdfLaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Only needed, if cm-super-fonts are not installed
+\ifpdf
+	%\usepackage{ae}       %%Use only just one of these packages:
+	%\usepackage{zefonts}  %%depends on your installation.
+\else
+	%%Normal LaTeX - no special packages for fonts required
+\fi
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifpdf %%Inclusion of graphics via \includegraphics{file}
+	\usepackage[pdftex]{graphicx} %%graphics in pdfLaTeX
+\else
+	\usepackage[dvips]{graphicx} %%graphics and normal LaTeX
+\fi
+%\usepackage[hang,tight,raggedright]{subfigure} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{epsf,epsfig,subfigure,latexsym,latexsym,amssymb,alltt}
+\usepackage{xspace,graphicx,makeidx}
+\usepackage{hyperref}
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+\setlength{\parskip}{2mm}               % space between paragraphs
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide} %%Smaller margins = more text per page.
+%\usepackage{fancyhdr} %%Fancy headings
+%\usepackage{longtable} %%For tables, that exceed one page
+
+\usepackage{listings}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+\lstset{language=C}
+
+%% Bibtex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bibliographystyle{plain}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Remarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% 1. Edit the used packages and their options (see above).
+% 2. If you want, add a BibTeX-File to the project
+%    (e.g., 'literature.bib').
+% 3. Happy TeXing!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options / Modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{options} %You need a file 'options.tex' for this
+%% ==> TeXnicCenter supplies some possible option files
+%% ==> with its templates (File | New from Template...).
+
+\newcommand{\FLORA}{{\mbox{\sc ${\cal F}${lora}\rm\emph{-2}}}\xspace}
+\newcommand{\FVIZ}{{\mbox{\sc ${\cal F}${lora}\rm\emph{-2} {Visualizer}}}\xspace}
+\newcommand{\fl}{\mbox{F-logic}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%% File Extensions of Graphics %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> This enables you to omit the file extension of a graphic.
+%% ==> "\includegraphics{title.eps}" becomes "\includegraphics{title}".
+%% ==> If you create 2 graphics with same content (but different file types)
+%% ==> "title.eps" and "title.pdf", only the file processable by
+%% ==> your compiler will be used.
+%% ==> pdfLaTeX uses "title.pdf". LaTeX uses "title.eps".
+\ifpdf
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+	\DeclareGraphicsExtensions{.eps}
+\fi
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%% The simple version:
+\title{\FVIZ: User's Manual}
+\author{{\href{mailto:windan@gmx.at}{Daniel Winkler}$^1$ \hspace{1cm} Michael Kifer$^2$ }
+\\\\
+$^1$\href{http://uibk.ac.at}{University of Innsbruck}\\
+Christoph-Probst-Platz\\
+Innrain 52\\
+6020 Innsbruck, Austria
+\\\\ $^2$Department of Computer Science\\
+State University of New York at Stony Brook\\
+Stony Brook, NY 11794-4400, U.S.A. }
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+%% The nice version:
+%\input{titlepage} %%You need a file 'titlepage.tex' for this.
+%% ==> TeXnicCenter supplies a possible titlepage file
+%% ==> with its templates (File | New from Template...).
+
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\tableofcontents %Table of contents
+\clearpage %The first chapter should start on an odd page.
+
+\pagestyle{plain} %Now display headings: headings / fancy / ...
+
+
+
+%% Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%\input{intro} %You need a file 'intro.tex' for this.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%The thesis should not only be the user manual, but should describe the
+%solution (the user manual should actually go into an appendix). So in
+%your thesis you should have something like (1) introduction (an overview
+%of the thesis - in your case a visualizer for f-logic), (3) an overview
+%of visualizers for languages similar to f-logic and some related work
+%(2) an overview of f-logic, (3) a detailed description of the software
+%system (architecture, components, test cases, examples), (5) some
+%conclusions and future extensions, (6) appendix for user manual and code
+%samples, examples, screenshots, etc.
+%The core part of your thesis should be (4).
+%I am not in Innsbruck before mid of June but you can reach me via skype
+%(id: "titiroman") in case you want to talk to me.
+%I'd say that based on the above you should make a detailed working table
+%of contents for your thesis and then send it to me and we see how we'll
+%proceed.
+%regards,
+
+%\begin{enumerate}
+%	\item introduction (an overview of the thesis - in your case a visualizer for f-logic)
+%	\item an overview of f-logic
+%	\item an overview of visualizers for languages similar to f-logic and some related work
+%	\item a detailed description of the software system (architecture, components, test cases, examples)
+%	\item some conclusions and future extensions
+%	\item appendix for user manual and code samples, examples, screenshots, etc.
+%\end{enumerate}
+
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+\FVIZ is an IDE environment for
+developing \FLORA applications. It provides the following components:
+%%
+\begin{itemize}
+	\item a \emph{text editor} for editing \FLORA source code
+	\item a \emph{visualizer} for viewing class hierarchies specified
+          in \FLORA
+	\item a \emph{console} for communication with the \FLORA reasoner
+	\item a \emph{view} for the currently loaded modules
+\end{itemize}
+
+The following sections describe these components in detail and explain how
+to work with the visualizer to author and run \FLORA source files.
+
+\subsection{Technology}
+\label{sec:introduction_technology}
+
+\FVIZ is based on the \emph{Eclipse RCP} framework\footnote{
+Eclipse RCP is a platform for building and deploying rich client applications.
+It includes Equinox, a component framework based on the OSGi standard, the
+ability to deploy native GUI applications to a variety of desktop operating
+systems, such as Windows, Linux and Mac OS X, and an integrated update mechanism
+for deploying desktop applications from a central server.\cite{erh}
+  }
+  %%
+and is therefore able to
+run on different operating systems, such as Windows, Linux and Mac OS.
+
+\FVIZ requires that
+Java, version 1.5 or higher, is installed. It also requires
+\FLORA 0.95 (or higher)\footnote{http://flora.sourceforge.net}
+and XSB 3.0.1 (or higher).\footnote{http://xsb.sourceforge.net}
+
+\section{About \FLORA}
+\label{sec:flora}
+
+\FLORA is a sophisticated object-oriented knowledge base language and
+application development platform. It is implemented as a set of run-time
+libraries and a compiler that translates a unified language of \fl
+\cite{KLW95}, HiLog \cite{hilog-jlp}, and Transaction Logic
+\cite{trans-chapter-98,trans-tcs94} into tabled Prolog code.
+
+Applications of \FLORA include intelligent agents, Semantic Web, ontology
+management, integration of information, and others.
+
+%%
+The programming language supported by \FLORA is a dialect of \fl with
+numerous extensions, which include a natural way to do meta-programming in
+the style of HiLog and logical updates in the style of Transaction
+Logic. \FLORA was designed with extensibility and flexibility in mind, and
+it provides strong support for modular software design through its unique
+feature of dynamic modules\footnote{\cite{flora-manual}}.
+
+\section{Related Work}
+\label{floravisualizer_relatedwork}
+To my best knowledge there is no other approach to visualize
+\FLORA knowledge bases yet.
+
+Some visualizers for other languages are e.g.
+\begin{itemize}
+  \item OntoViz, Jambalaya and TGVizTab for Protege (Ontologies)
+  \item Visur/Rar for Prolog
+  \item WSMT for WSML
+\end{itemize}
+
+Another approach from Valentin Zacharias and Imen Borgi was to
+visualize the structure of the rules instead of the class
+hierarchy \cite{rule-base-visualization}.
+
+
+
+\section{About \FVIZ}
+\label{sec:floravisualizer}
+The \FVIZ is written in Java and therefore able to be used on many operating
+systems.
+It is implemented as eclipse RCP\footnote{Rich Client Platform} feature and
+can thus be installed in several ways. For information on the installation
+have a look at the User Manual\footnote{
+see \ref{appendix:floramanual}}.
+
+It mainly consists of a static part, which can be used without installing
+\FLORA on the system, and a "reasoned" part which needs to have \FLORA
+installed on the system.
+
+The static part consists of a \emph{Navigator} which shows the current
+projects and a \emph{Texteditor} which is intended to be used for
+\FLORA text files.
+
+The reasoned part runs a \FLORA session in the background which is
+queried to get information about the current state of the session.
+To display illustrate the state to the user there are different
+features:
+\begin{enumerate}
+	\item A \emph{Module View} which shows the currently loaded modules
+	\item A \emph{Console View} which allows to query the reasoner
+	\item a \emph{Class Diagram View} which displays the objects of a module
+\end{enumerate}
+
+\subsection{The Navigator View}
+\label{sec:floravisualizer_navigator}
+The Navigator View is the standard eclipse navigator. It's not extended
+or modified in any way\footnote{
+For more information on the navigator have a look at 
+\url{http://help.eclipse.org/help32/index.jsp?topic=/org.eclipse.platform.doc.user/concepts/cnav.htm}}.
+
+\subsection{The \FVIZ Texteditor}
+\label{sec:floravisualizer_texteditor}
+The \FVIZ Texteditor is an editor to develop \FLORA knowledge bases. It
+supports \emph{syntax highlighting}, \emph{auto-editing}, \emph{formatting}
+and \emph{interaction} with the \FLORA reasoner.
+
+\subsubsection{Architecture}
+\label{sec:floravisualizer_texteditor_architecture}
+The \FVIZ Texteditor is implemented as extension for the
+\emph{org.eclipse.ui.editors} extension point\footnote{
+For information on eclipse extension points see
+\url{http://help.eclipse.org/help32/topic/org.eclipse.platform.doc.isv/guide/workbench_basicext.htm}
+}.
+
+Additionally actions are defined to interact with the \FVIZ Reasoner
+by extending the \emph{org.eclipse.ui.actionSets} extension point. The actions
+copy the highlighted text to temporary files and load or add them to
+\FLORA modules.
+
+\subsubsection{Syntax Highlighting}
+To implement syntax highlighting in an eclipse RCP editor the configuration
+file\footnote{
+org.eclipse.jface.text.source.SourceViewerConfiguration}
+must be extended. The method to overwrite\footnote{
+see net.sourceforge.flora.eclipse.texteditor.editor.FloraSourceViewerConfiguration}
+is called
+\begin{verbatim}
+  public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer)
+\end{verbatim}
+
+This method allows us to specify rules to tokenize the text. These tokens are then used
+to select the type of highlighting (color, font, ...). To specify rules existing classes
+from the \emph{org.eclipse.jface.text.rules.*} package can be used. Since some tokens
+have a very specific signature (e.g. variables start with a '?' followed by one
+underscore or letter followed by ...) it's necessary to implement the rule by
+using the interface \emph{org.eclipse.jface.text.rules.IPredicateRule}. The main
+method to implement is
+\begin{verbatim}
+  public IToken evaluate(ICharacterScanner scanner)
+\end{verbatim}
+which returns the token specified in the constructor if the read text matches the
+signature of the token or a undefined token if not.
+
+
+\subsubsection{Formatting}
+To format the text a \emph{formatting strategy}\footnote{
+net.sourceforge.flora.eclipse.texteditor.format.FloraFormattingStrategy}
+had to be implemented. This method is responsible for formatting the text
+properly.
+
+When this strategy is called the selected text of the source editor is passed
+to a lexer\footnote{
+net.sourceforge.flora.eclipse.texteditor.format.FloraLexer}.
+This lexer splits the text up into different tokens namely whitespace tokens,
+comment tokens and source code tokens. These tokens are passed to a
+\emph{FloraSourceText}\footnote{
+net.sourceforge.flora.eclipse.texteditor.format.elements.FloraSourceText}
+object which saves all tokens in a list. When formatting the text the
+whitespace tokens get adjusted. Therefore the preceding and succeeding
+tokens are analyzed.
+
+To get a proper indentation each token is compared with items of a lists
+with tokens that increase or decrease the indentation. If such a token is
+detected the indentation is processed and stored.
+Therefore a stack for hosting the sizes of indentations is created.
+The stack is necessary because the formatter behaves differently if e.g. a line brakes
+after a opening parenthesis or not (if the line brakes the indentation is
+increased by one tab, if the line doesn't break the indentation is set to the
+position of the parenthesis plus one).
+
+
+\subsubsection{Auto-Editing}
+The auto-editing feature has 2 basic features.
+Therefore the \emph{DefaultIndentLineAutoEditStrategy}\footnote{
+net.sourceforge.flora.eclipse.texteditor.format.DefaultIndentLineAutoEditStrategy}
+had to be extended and used in the sourceviewer configuration\footnote{
+public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType)}.
+
+First there is a auto-indentation which automatically fits the indentation when
+entering a newline. Therefore the features of formatting are used. The text of the
+current rule is copied and passed to the formatter. The formatter then processes the
+needed indentation which is then used to indent the line to the right position.
+
+The second feature is automatic closing of opening braces, strings, etc.
+The auto-edit strategy therefore checks the entered command. If this command
+has as text property such a character the strategy automatically inserts the
+closing counterpart after that sign.
+
+When entering a closing character the strategy checks if the following character
+is equal to the entered one. If so the entered character is ignored and the offset
+of the cursor is increased by one. This has the effect that closing braces are not
+doubled when entered by the strategy and the user.
+
+\subsubsection{Interaction}
+This means that the user has the possibility to send queries or rules
+written with the text editor directly to the reasoner. Therefore actions
+look up the selected text and copy this text text to a temporary file
+which is then (depending on the users choice) added, loaded or executed as
+query.
+
+\subsection{The \FLORA Reasoner}
+\label{sec:floravisualizer_reasoner}
+The \FLORA Reasoner is used to synchronize the views which display the state
+of the \FLORA session with the current session.
+
+\subsubsection{java API}
+\label{sec:floravisualizer_reasoner_javaAPI}
+The \FLORA reasoner uses the \emph{java API} shipped with \FLORA to create
+a new \FLORA session. The session can be accessed by the \emph{FloraSession}
+class\footnote{
+see \cite{flora-manual}} which allows the reasoner to get information about the
+current session by sending queries.
+
+\subsubsection{Model}
+\label{sec:floravisualizer_reasoner_model}
+To display the current state of a \FLORA session a model is built. This is done
+by querying the \FLORA reasoner to get the currently loaded modules by using
+the implemented rules\footnote{
+see \ref{sec:floravisualizer_reasoner_visualizer.flr}}
+for building a hierarchical structure.
+
+This model is used by the \emph{GUI} to display the current state of the \FLORA
+session. It uses a root element called \emph{FloraModel} which has \emph{FloraModules}
+as child elements. These \emph{FloraModules} each have lists containing the root
+elements (these may be \emph{FloraClasses} and \emph{FloraInstances}). The
+\emph{FloraClasses} again may have sub\emph{FloraClasses} and \emph{FloraInstances}
+whereas the \emph{FloraInstances} don't have any elements.
+
+\begin{figure}
+  \includegraphics[width=0.9\textwidth]{FloraModel}\\
+  \caption{The \FLORA model}\label{figure:floramodel}
+\end{figure}
+
+Since the model must always be up-to-date it's needed to use the Observer
+pattern. The \emph{Observable} is the \emph{FloraReasoner} class since each
+modification of the state of the current session must use this class. The
+\emph{FloraModel} is the corresponding \emph{Observer} and again
+\emph{Observable} which is observed by the GUI parts.
+
+This two steps allow the \emph{FloraModel} to decide which Views shall
+be updated. This behavior is needed because updating all views at every change
+would take too much time since the model would have to fully rebuild all
+modules at every change since the commands aren't parsed and interpreted
+to check which modules or objects are affected.
+Therefore the model is some kind of proxy which checks at every change of state
+the currently loaded modules and sets them as 'dirty'. This means that the
+current content of the module in the model \emph{may} be out of sync with the content
+of the module in the \FLORA session.
+When a view want's more detailed information
+of a module (e.g. the class hierarchy) the model (re)loads this information
+by querying the reasoner. This guaranties that the \emph{FloraModel} is
+always up-to-date.
+
+\subsubsection{Registration}
+Since the number of objects in a module may be infinite the \FVIZ just
+takes notice of \emph{registered} objects when building the model.
+Therefore a set of rules had to be implemented to
+\begin{itemize}
+  \item register objects
+  \item unregister objects
+  \item find registered objects
+\end{itemize}
+
+For information on how to register objects have a look at
+\ref{appendix:floramanual}.
+
+\subsubsection{visualizer.flr}
+\label{sec:floravisualizer_reasoner_visualizer.flr}
+The visualizer.flr file mainly has two functions: First it has to provide
+methods to manage the registration of objects and second it has
+to provide methods to get the hierarchical structure of these objects.
+
+To register objects they get inserted in lists for each module
+\footnote{see \ref{appendix:visualizer.flr}}. To keep
+track of whether an object was registered programmatically or
+manually there are two different methods implemented:
+\begin{verbatim}
+  1. ?Mod[%register(?Spec)]
+  2. ?Mod[%registerManually(?Spec)]
+\end{verbatim}
+It is intended that the users uses the \emph{register} method
+to register objects directly in files because the
+\emph{registerManually} method is used by GUI actions. This
+has the benefit of more clarity in particular when unregistering
+objects since the unregistration distinguishes between manually
+and programmatically registered objects\footnote{
+see \ref{sec:floravisualizer_classhierarchyview_unRegister}}.
+
+To receive the structure of the registered objects the following
+methods are implemented:
+\begin{verbatim}
+  1. ?Mod[roots -> ?R]
+  2. ?Mod[rootClass -> ?RC]
+  3. ?Mod[rootInstance -> ?RI]
+  4. ?E[subclass(?Mod) -> ?SC]
+  5. ?E[instance(?Mod) -> ?I]
+\end{verbatim}
+
+This methods allow the program to get the root elements (of the
+registered objects) and by using the \emph{subclass} and \emph{instance}
+methods recursively build a tree which reflects the class hierarchy
+of the current \FLORA session.
+
+\paragraph{Usage}
+The file is directly implemented as a \FLORA package. To load this file
+the command
+\begin{verbatim}
+  [visualizer >> VISUALIZER_MODULE].
+\end{verbatim}
+needs to executed (where \emph{VISUALIZER\_MODULE} is the the name of the
+module where the rules shall be loaded).
+
+\subsection{The \FVIZ Console View}
+\label{sec:floravisualizer_consoleview}
+The \FVIZ Console View allows the user to communicate directly with
+the \FLORA session.
+
+\subsubsection{Architecture}
+\label{sec:floravisualizer_consoleview_architecture}
+At first the implementation of the console read all input until it got
+an input delimiter (which is a '.' followed by a whitespace character).
+After that the console sent the command to the \FVIZ reasoner which then
+sent the command to the \FLORA session. The problem with that behavior was
+that the command had to be parsed before sending the query to the session
+to filter the names of the variables.
+This had to be done because the \FLORA
+\emph{java API} needs this variables to execute queries properly.
+
+Since the \FVIZ doesn't implement a full \FLORA parser the parsing of
+the command is error prone (e.g. a encapsulated variable maybe doesn't get
+recognized). This would lead to a wrong or incomplete answers in case.
+
+Therefore an alternative had to be looked for. The only way to
+circumnavigate the problem of parsing is to load the command within a file and
+listen to the \FLORA session output. The problem with this way is that the
+\emph{interprolog API} doesn't support listening to the output of
+native engines\footnote{
+The native engine is based on Java Native Interface (JNI)
+whereas the subprocess engine is based on sockets}
+yet. But since the native engine doesn't work on Linux (yet) and
+the subprocess engine works on all \FLORA supported systems
+the decision was made to the benefit of this solution.
+
+When a full command is recognized the console reader creates a temporary file
+which is \emph{added}\footnote{
+if the file would be \emph{loaded} the current content of the module
+would get lost}
+to the \emph{main} module of the current \FLORA
+session. Simultaneously a listener is waiting for output from the \FLORA
+engine. When output is recognized it is directly printed on the \FVIZ
+Console.
+
+\subsubsection{Output}
+\label{sec:floravisualizer_consoleview_output}
+This version of the console has on the one hand the benefit that now the
+output of files which produce output also is printed to the console. On the
+other hand it has the disadvantage that for every successful query a
+\begin{verbatim}
+    | ?-
+
+    yes
+\end{verbatim}
+is written to the console. Thinking of the recursively build model of
+the \FLORA session a solution had to be found to get rid of the flood
+of 'yes' messages.
+
+Therefore the listener doesn't print the text directly to the console
+any more, instead it buffers the text and starts a worker thread
+which refines the
+buffered text and afterwards prints it to console\footnote{
+see \ref{appendix:filterRegExp}}.
+
+This has the consequence that the console now nearly behaves like
+a standard \FLORA console (e.g. when using the \emph{java API} it was not
+possible to display or even recognize errors at loading from files)
+with the restriction of having to load queries to files before executing
+them.
+
+\subsection{The \FVIZ Module View}
+\label{sec:floravisualizer_moduleview}
+The \FVIZ Module View is able to show the currently loaded \FLORA modules.
+By clicking a module the \FVIZ Module
+View opens a \FVIZ Class Diagram View\footnote{
+see \ref{sec:floravisualizer_classdiagramview}}
+which displays the hierarchy of the registered objects in the
+chosen module.
+
+\subsubsection{Architecture}
+\label{sec:floravisualizer_moduleview_architecture}
+The \FVIZ Module View is implemented as an extension for the
+\emph{org.eclipse.ui.views} extension point.
+
+The view consists displays a table which is showing the loaded modules.
+Therefore the table is registered as observer for the \FLORA
+model\footnote{see \ref{sec:floravisualizer_reasoner_model}}.
+
+Additionally actions are registered to create, hide and
+filter \FLORA modules. For information on how to manage modules
+have a look at \ref{sec:moduleview_usage} and \cite{flora-manual}.
+
+The \FVIZ Module View is also realized as drop target. This means
+that files can be loaded to modules by dragging them from the navigator
+view to the module view. Another possibility to load the files would
+be to use the exact command to load a file at the console.
+To realize the drop functionality a \emph{DropTarget} had to be created which
+is registered as drop listener at the modules table. When dropping
+a file the \emph{FloraModelDropTarget} opens a pop-up which
+let's the user choose between 3 options:
+\begin{itemize}
+  \item load to module and erase registered objects
+  \item load to module and keep registered objects
+  \item add to module and keep registered objects
+\end{itemize}
+This offers the user the possibilities to either load or add a
+the file to the module. When loading he has to choose if he
+wants to keep the registered objects registered or if he wants
+to delete them.
+
+When loading a file the user maybe wants to use the module for
+some other purpose and therefore he wants to have all registered
+objects deleted before loading the new file.
+When adding files the user will like to have the registered objects
+still registered and therefore this option is not available when
+adding files.
+In spite of that the user is able to comfortably register and 
+unregister objects using the \FVIZ Class Diagram View\footnote{
+see \ref{sec:floravisualizer_classdiagramview}}.
+
+\subsection{The \FVIZ Class Diagram View}
+\label{sec:floravisualizer_classdiagramview}
+The \FVIZ Class Diagram View is a view to show the hierarchy of
+classes and instances in a \FLORA module.
+
+\subsubsection{Architecture}
+\label{sec:floravisualizer_classdiagramview_architecture}
+To display the hierarchy of a module the \FVIZ Class Diagram View
+uses the model of the \FLORA session
+(see \ref{sec:floravisualizer_reasoner_model}).
+This model is used to create a graph object which can be displayed by
+\emph{JPowerGraph}\footnote{
+\url{http://jpowergraph.sourceforge.net}}
+which is used to visualize the hierarchy.
+
+The creation of the graph is done by a factory\footnote{
+net.sourceforge.flora.eclipse.visualizer.graph.factory.GraphFactory}
+which traverses the model recursively. Since the model offers the
+distinction between classes and instances the factory is
+able to create different nodes for them.
+
+If a class has more instances than a specified maximum size
+then the \FVIZ draws an instance cluster instead of single
+instances to save space and keep the diagram neat.
+
+Note that the graph is only able to display the state of
+the \FLORA session. It's not possible to modify it in any
+way since this wouldn't have any effort. This comes from
+the circumstance that the graph displays the state of a module
+and this state isn't in an $1:1$ relation to the file which
+has been loaded to the module. This entails that it's not
+possible to save modifications made on a state of a module
+directly in a file.
+
+\subsubsection{Information Dialogs}
+The \FVIZ Class Diagram View offers the possibility to show
+detailed information about a node. Therefore a dialog opens
+when double clicking on or choosing the proper
+item from the context menu of an item.
+
+The dialog contains 2 tables containing the values and the
+types of selected node. These properties are loaded dynamically
+to save time when the model is built.
+To get the attributes of an element queries like
+\begin{verbatim}
+    String query = elementName + "[ ?X -> ?Y ]@" + moduleName + ".";
+\end{verbatim}
+are used to figure them out.
+
+For instance clusters a dialog listing all instances of the instance
+cluster pops up. When double clicking on such an instance the
+according node dialog gets opened.
+
+\subsubsection{Registering and Unregistering}
+To allow the user to easily register or unregister new objects for
+visualization the \emph{JPowerGraph} toolbar is extended with buttons
+for these operations.
+
+When clicking the \emph{Register} button a dialog which prompts
+the user to enter a list with names of the objects to register.
+This list is parsed by using a regular expression
+\begin{verbatim}
+    String tempString = list.replaceAll("[[\\s]*,*]++", ",");
+    String[] splitList = tempString.split(",");
+\end{verbatim}
+to get an array containing the names of the objects to register.
+To register the rule
+\begin{verbatim}
+    ?Mod[%registerManually(?Spec)]
+\end{verbatim}
+is used to register the objects. This allows us to distinguish between
+objects registered directly in files and objects registered manually.
+
+When opening the unregister dialog it shows us two separate lists
+with programmatically and manually registered objects. The dialog
+allows us to select registered objects and unregister them by
+affirming the selection.
+
+\section{Conclusion and future Extensions}
+\subsection{Conclusion}
+The implementation of the \FVIZ brings - like it's basic feature - two
+advantages. \FLORA is already shipped with support for editing source
+files, but therefore \emph{emacs} is needed to be installed on the system.
+
+By implementing a new editor based on eclipse RCP the user doesn't need
+emacs any more and is now in favor of using all major advantages that
+such an application brings with it. Especially for people who aren't
+used to emacs this GUI application will be much clearer to work with.
+The \FVIZ text editor supports all features of the emacs variant and
+additionally automatic formatting of a whole file.
+
+Also the eclipse navigator view is a nice utility to keep track of
+projects and files.
+
+The second and much bigger benefit is the visualization of the state of
+the \FLORA session. The user can now directly interact with the \FLORA
+session by using files, the console, the modules view or the class
+diagram view. The changes can then directly be surveyed by using
+the different views for visualization of the sessions state.
+
+Note that the \FVIZ doesn't work with the official release of
+\FLORA (Version 0.94 Narumigata). Until the new version is released
+(Version 0.95 Androcymbium) the CVS version of \FLORA must be
+used.
+
+\subsection{Future Extensions}
+The \FVIZ was developed by great backup of Michael Kifer. In
+collaboration we worked out the features which the \FVIZ should
+have to be a good IDE for \FLORA. Therefore the range of functions
+is complete to develop \FLORA knowledge bases to my mind.
+Some extensions which \emph{might} nevertheless be useful are listed below:.
+
+\subsubsection{The \FVIZ Class Diagram View}
+The class diagram currently shows the hierarchical relations between
+the registered objects. A possible extension might be a option to switch
+from displaying the hierarchical relations to visualizing the values
+and types as graph.
+
+\subsubsection{The \FVIZ Texteditor}
+The \FVIZ Texteditor could be extended with an outline view. This is
+not yet implemented since the \FVIZ parses the text just on the surface.
+This extension would need to implement a full \FLORA parser which
+generates a model from the source code.
+
+\section{ACKNOWLEDGEMENTS}
+
+I would like to thank
+\begin{itemize}
+  \item Dumitru Roman for helping along with this project.
+  \item Mick Kerrigan for developing JPowerGraph and for helping along with this project.
+  \item Michael Kifer for supporting me at the entire developing process.
+\end{itemize}
+
+\appendix
+
+\section{getPresentationReconciler}
+\label{appendix:getPresentationReconciler}
+\begin{verbatim}
+public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
+
+  PresentationReconciler reconciler = new PresentationReconciler();
+
+  DefaultDamagerRepairer dr = new DefaultDamagerRepairer(new FloraCodeScanner());
+  reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+  reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+
+  dr = new DefaultDamagerRepairer(new FloraCommentScanner());
+  reconciler.setDamager(dr, FloraPartitionScanner.FLORA_SINGLE_LINE_COMMENT);
+  reconciler.setRepairer(dr, FloraPartitionScanner.FLORA_SINGLE_LINE_COMMENT);
+
+  reconciler.setDamager(dr, FloraPartitionScanner.FLORA_MULTI_LINE_COMMENT);
+  reconciler.setRepairer(dr, FloraPartitionScanner.FLORA_MULTI_LINE_COMMENT);
+
+  return reconciler;
+}
+\end{verbatim}
+
+
+\section{visualizer.flr}
+\label{appendix:visualizer.flr}
+\begin{verbatim}
+?Mod[%register(?Spec)] :-
+  if is_list(?Spec) then
+    // Spec is a list of objects to register
+    insertall{?Mod[registeredObject->?Obj] |
+      member(?Obj,?Spec)@_prolog(basics),
+      not ?Mod[registeredManually->?Obj]}
+  else if ?Spec=?(?) then
+    // Spec is a unary predicate specifying the set of objects to register
+    insert{?Mod[registeredObject->?Obj] |
+      ?Spec, ?Spec = ${?(?Obj)},
+      not ?Mod[registeredManually->?Obj]}
+  else
+    %abort(['Visualizer: Invalid object registration request: ',
+      ?Spec])@_system.
+
+?Mod[%unregister(?Spec)] :-
+  if is_list(?Spec) then (
+  // Spec is a list of objects to deregister
+  deleteall{?Mod[registeredObject->?Obj] |
+    member(?Obj,?Spec)@_prolog(basics)},
+  deleteall{?Mod[registeredManually->?Obj] |
+    member(?Obj,?Spec)@_prolog(basics)}
+  ) else if ?Spec=?(?) then (
+    // Spec is a unary predicate specifying the set of objects to deregister
+    deleteall{?Mod[registeredObject->?Obj] |
+      ?Spec, ?Spec = ${?(?Obj)}},
+    deleteall{?Mod[registeredManually->?Obj] |
+      ?Spec, ?Spec = ${?(?Obj)}}
+  ) else
+    %abort(['Visualizer: Invalid object deregistration request: ',
+      ?Spec])@_system.
+
+
+// can register a single object or a list of objects
+?Mod[%registerManually(?Spec)] :-
+  if is_list(?Spec) then
+    insertall{?Mod[registeredManually->?Obj] |
+    member(?Obj,?Spec)@_prolog(basics),
+    not ?Mod[registeredObject->?Obj]}
+  else
+    insert{?Mod[registeredManually->?Spec]|
+      not ?Mod[registeredObject->?Spec]}.
+
+// can deregister a single object or a list of objects
+?Mod[%unregisterManually(?Spec)] :-
+  if is_list(?Spec) then
+    deleteall{?Mod[registeredManually->?Obj] |
+      member(?Obj,?Spec)@_prolog(basics)}
+  else delete{?Mod[registeredManually->?Spec]},
+    refresh{?Mod[registeredObject->?Obj]}.
+
+?Mod[registeredObject->?Obj] :- ?Mod[registeredManually->?Obj].
+
+?Mod[registeredProgrammatically->?Obj] :-
+  ?Mod[registeredObject->?Obj],
+  not ?Mod[registeredManually->?Obj].
+
+
+// these two are here to prevent "undefined method" errors
+__[registeredObject-> __].
+__[registeredManually-> __].
+
+?E[instance(?Mod) -> ?I] :-
+  ?L = collectset{?O|?Mod[registeredObject->?O]@_@},
+  member(?I, ?L)@_prolog(basics),
+  copy_term(?E,?EC)@_prolog(basics),
+  (?I:?E)@?Mod,
+  variant(?E,?EC)@_prolog(subsumes),
+  not registered_non_immediate_instance(?L,?I,?E,?Mod).
+registered_non_immediate_instance(?L,?I,?E,?Mod) :-
+  member(?C,?L)@_prolog(basics),
+  copy_term(?E,?CE)@_prolog(basics),
+  copy_term(?I,?CI)@_prolog(basics),
+  ?C::?E@?Mod,
+  ?I:?C@?Mod,
+  variant(?E,?CE)@_prolog(subsumes),
+  variant(?I,?CI)@_prolog(subsumes).
+
+?E[subclass(?Mod) -> ?SC] :-
+  ?L = collectset{?O|?Mod[registeredObject->?O]@_@},
+  member(?SC, ?L)@_prolog(basics),
+  copy_term(?E,?EC)@_prolog(basics),
+  (?SC::?E)@?Mod,
+  variant(?E,?EC)@_prolog(subsumes),
+  not registered_non_immediate_subclass(?L,?SC,?E,?Mod).
+registered_non_immediate_subclass(?L,?SC,?E,?Mod) :-
+  member(?C,?L)@_prolog(basics),
+  copy_term(?E,?CE)@_prolog(basics),
+  copy_term(?SC,?CSC)@_prolog(basics),
+  ?C::?E@?Mod,
+  ?SC::?C@?Mod,
+  variant(?E,?CE)@_prolog(subsumes),
+  variant(?SC,?CSC)@_prolog(subsumes).
+
+?Mod[roots -> ?R] :-
+  ?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+  member(?R, ?L)@_prolog(basics),
+  not registered_nonroot_object(?L,?R,?Mod).
+registered_nonroot_object(?L,?R,?Mod) :-
+  member(?C, ?L)@_prolog(basics),
+  copy_term(?R,?CR)@_prolog(basics),
+  (?R::?C@?Mod ; ?R:?C@?Mod),
+  variant(?R,?CR)@_prolog(subsumes).
+
+?Mod[rootClass -> ?RC] :-
+  ?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+  ?Mod[roots -> ?RC],
+  member(?RC,?L)@_prolog(basics),
+  (?_I:?RC@?Mod or (?RC::?_S@?Mod, ?_S \= (?;?))).
+
+?Mod[rootInstance -> ?RI] :-
+  ?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+  ?Mod[roots -> ?RI],
+  member(?RI,?L)@_prolog(basics),
+  not ?Mod[rootClass -> ?RI].
+
+obj_exists(?O,?Mod) :-
+  copy_term(?O,?CO)@_prolog(basics),
+  ?O[]@?Mod,
+  variant(?CO,?O)@_prolog(subsumes).
+\end{verbatim}
+
+
+\section{Regular Expression to filter Console Output}
+\label{appendix:filterRegExp}
+Code from \emph{net.sourceforge.flora.eclipse.reasoner.util.EngineOutputListener}:
+\begin{verbatim}
+  public String clean(String stringToClear) {
+    String temp = stringToClear.replaceAll("\\|\\s\\?-\\s*yes\\s*", "");
+    return temp;
+  }
+\end{verbatim}
+
+\section{Manual}
+\label{appendix:floramanual}
+\include{manual}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY AND OTHER LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A small distance to the other stuff in the table of contents (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+%% The Bibliography
+%%\clearpage
+\addcontentsline{toc}{section}{Bibliography} %'Bibliography' into toc
+\nocite{*} %Even non-cited BibTeX-Entries will be shown.
+\bibliographystyle{plain} %Style of Bibliography: plain / apalike / amsalpha / alpha / ...
+\bibliography{literature} %You need a file 'literature.bib' for this.
+
+%% The List of Figures
+\clearpage
+%%\addcontentsline{toc}{section}{List of Figures}
+%%\listoffigures
+
+%% The List of Tables
+%\clearpage
+%\addcontentsline{toc}{section}{List of Tables}
+%\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix
+%% ==> Write your text here or include other files.
+
+%\input{FileName} %You need a file 'FileName.tex' for this.
+
+\end{document}

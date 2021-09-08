@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="net.sourceforge.flora.eclipse.view"
+            class="org.eclipse.ui.internal.console.ConsoleView"
+            id="net.sourceforge.flora.eclipse.console.consoleView"
+            name="Flora Console"/>
+      <category
+            name="Flora"
+            id="net.sourceforge.flora.eclipse.view">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="net.sourceforge.flora.eclipse.preferencePage"
+            class="net.sourceforge.flora.eclipse.console.preference.FloraConsolePreferencePage"
+            id="net.sourceforge.flora.eclipse.console.preferencePage"
+            name="Flora-2 Console"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="net.sourceforge.flora.eclipse.console.preference.FloraConsolePreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSetPartAssociations">
+      <actionSetPartAssociation targetID="net.sourceforge.flora.eclipse.console.actionSet">
+         <part id="net.sourceforge.flora.eclipse.console.consoleView"/>
+      </actionSetPartAssociation>
+   </extension>
+
+</plugin>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="net/sourceforge/jpowergraph/|net/sourceforge/jpowergraph/defaults/|net/sourceforge/jpowergraph/example/|net/sourceforge/jpowergraph/example/edges/|net/sourceforge/jpowergraph/example/nodes/|net/sourceforge/jpowergraph/layout/|net/sourceforge/jpowergraph/lens/|net/sourceforge/jpowergraph/manipulator/|net/sourceforge/jpowergraph/manipulator/dragging/|net/sourceforge/jpowergraph/manipulator/edge/|net/sourceforge/jpowergraph/manipulator/popup/|net/sourceforge/jpowergraph/manipulator/selection/|net/sourceforge/jpowergraph/painters/|net/sourceforge/jpowergraph/pane/|net/sourceforge/jpowergraph/swt/|net/sourceforge/jpowergraph/swt/manipulator/|net/sourceforge/jpowergraph/swt/viewcontrols/|net/sourceforge/jpowergraph/swtswinginteraction/|net/sourceforge/jpowergraph/swtswinginteraction/color/|net/sourceforge/jpowergraph/swtswinginteraction/geometry/|net/sourceforge/jpowergraph/swtswinginteraction/listeners/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/jpowergraph.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

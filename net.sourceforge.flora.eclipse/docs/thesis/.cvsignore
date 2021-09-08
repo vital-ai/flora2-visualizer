@@ -1,0 +1,10 @@
+*.pdf
+*.blg
+*.out
+*.bbl
+*.aux
+*.toc
+*.lof
+*.~ml
+*.sav
+*.bmp

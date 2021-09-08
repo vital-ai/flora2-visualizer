@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="net.sourceforge.flora.eclipse.reasoner.preference.FloraReasonerPreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="net.sourceforge.flora.eclipse.preferencePage"
+            class="net.sourceforge.flora.eclipse.reasoner.preference.FloraReasonerPreferencePage"
+            id="net.sourceforge.flora.eclipse.reasoner.preferencePage"
+            name="Flora-2 Reasoner"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="net.sourceforge.flora.eclipse.reasoner.actionSet"
+            label="Flora Reasoner Actions"
+            >
+         <action
+               class="net.sourceforge.flora.eclipse.reasoner.action.RestartReasonerAction"
+               id="net.sourceforge.flora.eclipse.reasoner.restartAction"
+               label="Restart Flora Reasoner"
+               menubarPath="net.sourceforge.flora.eclipse.menu/reasoner"
+               style="push"
+               tooltip="restarts the Flora Reasoner"/>
+         <action
+               class="net.sourceforge.flora.eclipse.reasoner.action.ShowLogAction"
+               id="net.sourceforge.flora.eclipse.reasoner.showLogAction"
+               label="Show Session Log File"
+               menubarPath="net.sourceforge.flora.eclipse.menu/reasoner"
+               style="push"
+               tooltip="shows the log file of the current session"/>
+         <menu
+               id="net.sourceforge.flora.eclipse.menu"
+               label="F&amp;lora">
+            <separator name="reasoner"/>
+         </menu>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSetPartAssociations">
+      <actionSetPartAssociation targetID="net.sourceforge.flora.eclipse.reasoner.actionSet">
+         <part id="net.sourceforge.flora.eclipse.console.consoleView"/>
+      </actionSetPartAssociation>
+   </extension>
+
+</plugin>

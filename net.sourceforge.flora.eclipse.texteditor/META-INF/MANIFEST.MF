@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Flora Sourceeditor
+Bundle-SymbolicName: net.sourceforge.flora.eclipse.texteditor;singleton:=true
+Bundle-Version: 0.1.2
+Bundle-Activator: net.sourceforge.flora.eclipse.texteditor.FloraSourceEditorPlugin
+Bundle-Localization: plugin
+Require-Bundle: net.sourceforge.flora.eclipse,
+ net.sourceforge.flora.eclipse.reasoner,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ org.eclipse.ui.workbench.texteditor
+Eclipse-LazyStart: true
+Export-Package: net.sourceforge.flora.eclipse.texteditor,
+ net.sourceforge.flora.eclipse.texteditor.actions,
+ net.sourceforge.flora.eclipse.texteditor.editor,
+ net.sourceforge.flora.eclipse.texteditor.editor.rules,
+ net.sourceforge.flora.eclipse.texteditor.editor.scanners,
+ net.sourceforge.flora.eclipse.texteditor.format,
+ net.sourceforge.flora.eclipse.texteditor.format.elements,
+ net.sourceforge.flora.eclipse.texteditor.preferences

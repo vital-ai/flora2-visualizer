@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="net.sourecforge.flora.eclipse.feature"
+      label="Flora-2 Feature"
+      version="0.1.2"
+      plugin="net.sourceforge.flora.eclipse">
+
+   <description url="http://flora.sourceforge.net">
+      This feature supports a Flora-2 IDE for editing and visualizing
+Flora-2 knowledge bases
+   </description>
+
+   <copyright url="http://flora.sourceforge.net">
+      Author(s): Daniel Winkler
+Contact:   flora-users@lists.sourceforge.net
+Copyright (C) 2007 Digital Enterprise Research Insitute (DERI) Innsbruck
+   </copyright>
+
+   <license url="http://www.gnu.org/licenses/lgpl.html">
+      FLORA-2 Visualizer is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, 5th Floor, Boston, MA 02110-1301, USA.
+   </license>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse.console"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse.module"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse.reasoner"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.flora.eclipse.visualizer"
+         download-size="0"
+         install-size="0"
+         version="0.1.2"
+         unpack="false"/>
+
+</feature>

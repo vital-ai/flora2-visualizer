@@ -1,0 +1,130 @@
+/* File:      visualizer.flr
+ **
+ ** Author(s): Daniel Winkler
+ ** Contact:   flora-users@lists.sourceforge.net
+ **
+ ** Copyright (C) 2007 Digital Enterprise Research Insitute (DERI) Innsbruck
+ **
+ ** FLORA-2 Visualizer is free software; you can redistribute it and/or
+ ** modify it under the terms of the GNU Lesser General Public License
+ ** as published by the Free Software Foundation; either version 2
+ ** of the License, or (at your option) any later version.
+ ** This program is distributed in the hope that it will be useful,
+ ** but WITHOUT ANY WARRANTY; without even the implied warranty of
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ ** GNU Lesser General Public License for more details.
+ ** You should have received a copy of the GNU General Public License
+ ** along with this program; if not, write to the Free Software
+ ** Foundation, Inc., 51 Franklin Street, 5th Floor, Boston, MA  02110-1301, USA.
+ */
+ 
+?Mod[%register(?Spec)] :-
+	if is_list(?Spec) then
+	// Spec is a list of objects to register
+		insertall{?Mod[registeredObject->?Obj] | member(?Obj,?Spec)@_prolog(basics), not ?Mod[registeredManually->?Obj]}
+	else if ?Spec=?(?) then
+	// Spec is a unary predicate specifying the set of objects to register
+		insert{?Mod[registeredObject->?Obj] | ?Spec, ?Spec = ${?(?Obj)}, not ?Mod[registeredManually->?Obj]}
+	else
+		%abort(['Visualizer: Invalid object registration request: ', ?Spec])@_system.
+
+?Mod[%unregister(?Spec)] :-
+	if is_list(?Spec) then (
+	// Spec is a list of objects to deregister
+		deleteall{?Mod[registeredObject->?Obj] | member(?Obj,?Spec)@_prolog(basics)},
+		deleteall{?Mod[registeredManually->?Obj] | member(?Obj,?Spec)@_prolog(basics)}
+	)
+	else if ?Spec=?(?) then (
+	// Spec is a unary predicate specifying the set of objects to deregister
+		deleteall{?Mod[registeredObject->?Obj] | ?Spec, ?Spec = ${?(?Obj)}},
+		deleteall{?Mod[registeredManually->?Obj] | ?Spec, ?Spec = ${?(?Obj)}}
+	)
+	else
+		%abort(['Visualizer: Invalid object deregistration request: ', ?Spec])@_system.
+
+
+// can register a single object or a list of objects
+?Mod[%registerManually(?Spec)] :-
+        if is_list(?Spec) then
+	    insertall{?Mod[registeredManually->?Obj] |
+		      member(?Obj,?Spec)@_prolog(basics),
+		      not ?Mod[registeredObject->?Obj]}
+	else
+	    insert{?Mod[registeredManually->?Spec]|not ?Mod[registeredObject->?Spec]}.
+
+// can deregister a single object or a list of objects
+?Mod[%unregisterManually(?Spec)] :-
+        if is_list(?Spec) then
+	        deleteall{?Mod[registeredManually->?Obj] | member(?Obj,?Spec)@_prolog(basics)}
+	else delete{?Mod[registeredManually->?Spec]},
+	refresh{?Mod[registeredObject->?Obj]}.
+
+?Mod[registeredObject->?Obj] :- ?Mod[registeredManually->?Obj].
+
+?Mod[registeredProgrammatically->?Obj] :-
+	?Mod[registeredObject->?Obj],
+	not ?Mod[registeredManually->?Obj].
+
+
+// these two are here to prevent "undefined method" errors
+__[registeredObject-> __].
+__[registeredManually-> __].
+
+?E[instance(?Mod) -> ?I] :-
+	?L = collectset{?O|?Mod[registeredObject->?O]@_@},
+        member(?I, ?L)@_prolog(basics),
+        copy_term(?E,?EC)@_prolog(basics),
+        (?I:?E)@?Mod,
+        variant(?E,?EC)@_prolog(subsumes),
+        not registered_non_immediate_instance(?L,?I,?E,?Mod).
+registered_non_immediate_instance(?L,?I,?E,?Mod) :-
+	member(?C,?L)@_prolog(basics),
+        copy_term(?E,?CE)@_prolog(basics),
+        copy_term(?I,?CI)@_prolog(basics),
+	?C::?E@?Mod,
+	?I:?C@?Mod,
+        variant(?E,?CE)@_prolog(subsumes),
+        variant(?I,?CI)@_prolog(subsumes).
+
+?E[subclass(?Mod) -> ?SC] :-
+	?L = collectset{?O|?Mod[registeredObject->?O]@_@},
+	member(?SC, ?L)@_prolog(basics),
+	copy_term(?E,?EC)@_prolog(basics),
+	(?SC::?E)@?Mod,
+	variant(?E,?EC)@_prolog(subsumes),
+	not registered_non_immediate_subclass(?L,?SC,?E,?Mod).
+registered_non_immediate_subclass(?L,?SC,?E,?Mod) :-
+	member(?C,?L)@_prolog(basics),
+        copy_term(?E,?CE)@_prolog(basics),
+        copy_term(?SC,?CSC)@_prolog(basics),
+	?C::?E@?Mod,
+	?SC::?C@?Mod,
+        variant(?E,?CE)@_prolog(subsumes),
+        variant(?SC,?CSC)@_prolog(subsumes).
+
+?Mod[roots -> ?R] :-
+	?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+	member(?R, ?L)@_prolog(basics),
+	not registered_nonroot_object(?L,?R,?Mod).
+registered_nonroot_object(?L,?R,?Mod) :- 
+	member(?C, ?L)@_prolog(basics),
+        copy_term(?R,?CR)@_prolog(basics),
+	(?R::?C@?Mod ; ?R:?C@?Mod),
+        variant(?R,?CR)@_prolog(subsumes).
+
+?Mod[rootClass -> ?RC] :-
+	?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+	?Mod[roots -> ?RC],
+	member(?RC,?L)@_prolog(basics),
+	(?_I:?RC@?Mod or (?RC::?_S@?Mod, ?_S \= (?;?))).
+	
+?Mod[rootInstance -> ?RI] :-
+	?L = collectset{?O|?Mod[registeredObject->?O]@_@, obj_exists(?O,?Mod)},
+	?Mod[roots -> ?RI],
+	member(?RI,?L)@_prolog(basics),
+	not ?Mod[rootClass -> ?RI].
+
+obj_exists(?O,?Mod) :-
+	copy_term(?O,?CO)@_prolog(basics),
+	?O[]@?Mod,
+	variant(?CO,?O)@_prolog(subsumes).

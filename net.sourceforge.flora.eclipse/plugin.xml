@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="net.sourceforge.flora.eclipse.perspective.FloraPerspective"
+            fixed="false"
+            icon="icons/perspective.gif"
+            id="net.sourceforge.flora.eclipse.perspective"
+            name="Flora"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="net.sourceforge.flora.eclipse.actionSet"
+            label="Perspective Action Set"
+            visible="true">
+         <menu
+               id="net.sourceforge.flora.eclipse.menu"
+               label="F&amp;lora"/>
+         <action
+               icon="icons/redo_edit.gif"
+               id="redo"
+               label="Redo"
+               retarget="true"
+               style="push"
+               toolbarPath="main"/>
+         <action
+               icon="icons/undo_edit.gif"
+               id="undo"
+               label="Undo"
+               retarget="true"
+               style="push"
+               toolbarPath="main"/>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.resourceFilters">
+      <filter
+            pattern=".*"
+            selected="true"/>
+      <filter
+            pattern="*.P"
+            selected="true"/>
+      <filter
+            pattern="*.xwam"
+            selected="true"/>
+      <filter
+            pattern="*.fdb"
+            selected="true"/>
+      <filter
+            pattern="*.fld"
+            selected="true"/>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="Flora-2 Visualizer">
+         <property
+               name="aboutImage"
+               value="icons/about.gif"/>
+         <property
+               name="aboutText"
+               value="Author(s): Daniel Winkler&#x0A;Contact:   flora-users@lists.sourceforge.net&#x0A;&#x0A;Copyright (C) 2007 Digital Enterprise Research Insitute (DERI) Innsbruck&#x0A;&#x0A;FLORA-2 Visualizer is free software; you can redistribute it and/or modify it under the terms  of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.&#x0A;This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.&#x0A;You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, 5th Floor, Boston, MA  02110-1301, USA."/>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini"/>
+         <property
+               name="startupProgressRect"
+               value="0,0,570,15"/>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="net.sourceforge.flora.eclipse.preferences.PreferencePage"
+            id="net.sourceforge.flora.eclipse.preferencePage"
+            name="Flora-2 Preferences"/>
+   </extension>
+
+</plugin>

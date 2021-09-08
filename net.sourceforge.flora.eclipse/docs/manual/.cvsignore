@@ -1,0 +1,14 @@
+*.aux
+*.dvi
+*.log
+*.out
+*.pdf
+*.tcp
+*.tps
+auto
+*.bbl
+*.blg
+*.toc
+*.lof
+*.bmp
+Thumbs.db

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="net.sourceforge.flora.eclipse.visualizer.FloraVisualizer"
+            default="false"
+            icon="icons/sample.gif"
+            id="net.sourceforge.flora.eclipse.visualizer.floraVisualizer"
+            name="Flora-2 Visualizer"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="net.sourceforge.flora.eclipse.visualizer.preference.FloraVisualizerPreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="net.sourceforge.flora.eclipse.preferencePage"
+            class="net.sourceforge.flora.eclipse.visualizer.preference.FloraVisualizerPreferencePage"
+            id="net.sourceforge.flora.eclipse.visualizer.preferencePage"
+            name="Flora-2 Visualizer"/>
+   </extension>
+
+</plugin>
